@@ -28,6 +28,8 @@ def process_data(data):
         return get_processor(*data.split()[1:])
     if data.startswith('put'):
         return put_processor(*data.split()[1:])
+    if data == '':
+        return 'error\nwrong command\n\n'
     return 'error\nwrong command\n\n'
 
 def get_processor(key):
