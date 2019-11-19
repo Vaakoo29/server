@@ -23,13 +23,17 @@ class ClientServerProtocol(asyncio.Protocol):
 FOLDER = dict()
 
 def process_data(data):
-
     if data.startswith('get'):
-        return get_processor(*data.split()[1:])
+        try:
+            return get_processor(*data.split()[1:])
+        except Exception:
+            return 'error\nwrong command\n\n'
     if data.startswith('put'):
-        return put_processor(*data.split()[1:])
-    if data == '':
-        return 'error\nwrong command\n\n'
+        try:
+            return put_processor(*data.split()[1:])
+        except Exception:
+            return 'error\nwrong command\n\n'
+        #return put_processor(*data.split()[1:])
     return 'error\nwrong command\n\n'
 
 def get_processor(key):
